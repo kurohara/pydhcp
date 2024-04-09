@@ -11,6 +11,7 @@ setup(
         "netbox": [
             "pynetbox>=4.0.0,<5.0.0",
         ],
+        "dummy": [],
     },
     entry_points={
         "console_scripts": [

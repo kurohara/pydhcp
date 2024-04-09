@@ -34,11 +34,17 @@ class DummyBackend(DHCPBackend):
         
     def offer(self, packet):
         """ Generate an offer in response to a DISCOVER """
-        raise NotImplementedError()
+        # raise NotImplementedError()
+        return Lease(
+            client_ip="192.168.1.100",
+            client_mask="192.168.1.255",
+            lifetime=3600,
+        )
 
     def acknowledge(self, packet, offer):
         """ Generate an ACKNOWLEGE response to a REQUEST """
-        raise NotImplementedError()
+        # raise NotImplementedError()
+        return
 
     # Implementations MAY CHOOSE to implement specific behavior for some of the specific
     # client states that generate a DHCP request, non implemented states fall back to
@@ -46,24 +52,32 @@ class DummyBackend(DHCPBackend):
     # acknowledge
     def acknowledge_selecting(self, packet, offer):
         """ Generate an ACKNOWLEGE response to a REQUEST from a client in SELECTING state """
-        return self.acknowledge(packet, offer)
+        # return self.acknowledge(packet, offer)
+        return offer
 
     def acknowledge_renewing(self, packet, offer):
         """ Generate an ACKNOWLEGE response to a REQUEST from a client in RENEWING state """
-        return self.acknowledge(packet, offer)
+        # return self.acknowledge(packet, offer)
+        return Lease(
+            client_ip="192.168.1.100",
+            client_mask="192.168.1.255",
+            lifetime=3600,
+        )
 
     def acknowledge_rebinding(self, packet, offer):
         """ Generate an ACKNOWLEGE response to a REQUEST from a client in REBINDING state """
-        return self.acknowledge(packet, offer)
+        return self.acknowledge_renewing(packet, offer)
 
     def acknowledge_init_reboot(self, packet, offer):
         """ Generate an ACKNOWLEGE response to a REQUEST from a client in INITREBOOT state """
-        return self.acknowledge(packet, offer)
+        return self.acknowledge_renewing(packet, offer)
 
     def release(self, packet):
         """ Process a release """
-        raise NotImplementedError()
+        # raise NotImplementedError()
+        return
 
     def boot_request(self, packet, lease):
         """ Add boot options to the lease """
+        return
 
