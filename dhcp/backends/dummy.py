@@ -36,8 +36,8 @@ class DummyBackend(DHCPBackend):
         """ Generate an offer in response to a DISCOVER """
         # raise NotImplementedError()
         return Lease(
-            client_ip="192.168.1.100",
-            client_mask="192.168.1.255",
+            client_ip=ipaddress.ip_address("192.168.1.100"),
+            client_mask=ipaddress.ip_address("192.168.1.255"),
             lifetime=3600,
         )
 
@@ -59,8 +59,8 @@ class DummyBackend(DHCPBackend):
         """ Generate an ACKNOWLEGE response to a REQUEST from a client in RENEWING state """
         # return self.acknowledge(packet, offer)
         return Lease(
-            client_ip="192.168.1.100",
-            client_mask="192.168.1.255",
+            client_ip=ipaddress.ip_address("192.168.1.100"),
+            client_mask=ipaddress.ip_address("192.168.1.255"),
             lifetime=3600,
         )
 
